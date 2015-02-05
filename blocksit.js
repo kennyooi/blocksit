@@ -144,7 +144,7 @@
 		//update style first before get object height
 		obj.css({
 			'width': blockWidth - blocksOptions.offsetX*2,
-			'left': pos[0] * colwidth,
+			'left': pos[0] > 0  ? (pos[0] * colwidth) + blocksOptions.offsetX : blocksOptions.offsetX,
 			'top': pos[1],
 			'position': 'absolute'
 		});
