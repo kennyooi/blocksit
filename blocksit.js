@@ -130,16 +130,22 @@
 	
 	//set block position
 	var setPosition = function(obj, index) {
+        
+        var blockSize = 0;
+        
 		//check block size
 		if(!obj.data('size') || obj.data('size') < 0) {
-			obj.data('size', 1);
+			blockSize = 1;
 		} else if(obj.data('size') > blocksOptions.numOfCol) {
-			obj.data('size', blocksOptions.numOfCol);
+			blockSize = blocksOptions.numOfCol;
 		}
+        else {
+            blockSize = obj.data('size');
+        }
 		
 		//define block data
-		var pos = getBlockPostion(obj.data('size'));
-		var blockWidth = colwidth * obj.data('size') - (obj.outerWidth() - obj.width());
+		var pos = getBlockPostion(blockSize);
+		var blockWidth = colwidth * blockSize - (obj.outerWidth() - obj.width());
 
 		//update style first before get object height
 		obj.css({
@@ -152,8 +158,8 @@
 		var blockHeight = obj.outerHeight();
 		
 		//modify blockarr for new block
-		blockarrRemove(pos[0], obj.data('size'));
-		blockarrPush(obj.attr('id'), pos[0], pos[1], obj.data('size'), blockHeight);	
+		blockarrRemove(pos[0], blockSize);
+		blockarrPush(obj.attr('id'), pos[0], pos[1], blockSize, blockHeight);	
 	}
 	
 	$.fn.BlocksIt = function(options) {
